@@ -5,14 +5,17 @@ from common.operation_file import OperationFile
 
 
 class OperationExcel(object):
-    def __init__(self,excelpath):
-        self.path=excelpath  # 文件名称
-        if os.path.isfile(self.path) == False:
-            self.isExcel=False
-        elif os.path.exists(self.path) == False:
-            self.isExcel = False
+    def __init__(self,excelpath=None):
+        if excelpath==None:
+            self.path=None
         else:
-            self.isExcel = True
+            self.path=excelpath  # 文件名称
+            if os.path.isfile(self.path) == False:
+                self.isExcel=False
+            elif os.path.exists(self.path) == False:
+                self.isExcel = False
+            else:
+                self.isExcel = True
 
     # 通过pandas的库读取excel文件
     def read_excel_bypd(self,excelName=None):

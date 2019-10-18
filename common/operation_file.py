@@ -23,7 +23,7 @@ class OperationFile(object):
         return dirlist
 
     # 循环获取目录下的文件列表,并返回列表信息
-    def getfilelistbydir(self,rootdir,filelist=None):
+    def getfilelistbydir(self,rootdir,filelist=None,suffix=".wav"):
         if filelist==None:
             filelist=[]
 
@@ -35,7 +35,7 @@ class OperationFile(object):
             if os.path.isdir(path):
                 self.getchild(path + "/",filelist)
             else:
-                if str(dirname).endswith(".wav"):
+                if str(dirname).endswith(suffix):
                     filelist.append(dirname)
 
         return filelist
@@ -93,9 +93,9 @@ class OperationFile(object):
                  os.makedirs(root_dirpath)
              shutil.copyfile(s_path, taget_path)
 
-    def write_fileinfo(self):
-
-        pass
+    def write_fileinfo(self,filepath,lines):
+        with open(filepath, 'a+') as f:
+           f.writelines(lines)
 
 
 if __name__=="__main__":
