@@ -111,6 +111,25 @@ class OperationExcel(object):
             excelpath="4.全品类相关录音需求.xlsx"
             sheet_name="指令词"
 
+        elif gen_type==3:
+            excelpath="CMD ID Summary.xlsx"
+            sheet_name="命令词"
+
+        elif gen_type==5:
+            excelpath="YB101离在线测试用例.xlsx"
+            sheet_name="（非离线）纯在线本机&场景指令词表"
+
+        elif gen_type==6:
+            excelpath="YB101离在线测试用例.xlsx"
+            sheet_name="跨机控制指令词1-高频场景"
+
+        elif gen_type == 7:
+            excelpath = "YB101离在线测试用例.xlsx"
+            sheet_name = "跨机控制指令词2-低频场景"
+        elif gen_type==8:
+            excelpath="YB101离在线测试用例.xlsx"
+            sheet_name="离线指令词表"
+
         abs_path=(os.path.abspath('..'))+"/audiofile/"+excelpath
         print(abs_path)
         workbook = openpyxl.load_workbook(abs_path)
@@ -140,8 +159,9 @@ class OperationExcel(object):
             exceptvalue=""
             if suffixvalue in dict_info:
                 exceptvalue = dict_info[suffixvalue]
+                worksheet.append([item, exceptvalue])
 
-            worksheet.append([item,exceptvalue])
+
 
         workbook.save(self.path)
 
