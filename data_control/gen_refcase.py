@@ -7,12 +7,22 @@ class Genrefcase(object):
         self.ex_path=excelpath;
         self.ref_path=refpath
 
+    def write_txtfile(self,lastvalue="",s_dir=""):
+        ofobject = OperationFile()
+        obj, names = OperationExcel(self.ex_path).get_all_sheetnames()
+        for item in names:
+            ws_sheet = obj.get_sheet_by_name(item)
+            for r in range(3, ws_sheet.max_row + 1):
+                audiovalue =s_dir + item.upper() +lastvalue+"/"+ ws_sheet.cell(r, 1).value+".wav"
+                ofobject.write_fileinfo(self.ref_path, audiovalue+"\n")
+
     def write_ref(self):
        ofobject=OperationFile()
        obj,names= OperationExcel(self.ex_path).get_all_sheetnames()
        for item in names:
            ws_sheet=obj.get_sheet_by_name(item)
            filepath=self.ref_path+"/"+item+".ref"
+           print(filepath)
            for r in range(3,ws_sheet.max_row+1):
                audiovalue=ws_sheet.cell(r,1).value
                exceptvalue =str(ws_sheet.cell(r, 2).value)
@@ -35,7 +45,7 @@ class Genrefcase(object):
                 lines="test"+temp_item+"= modelType=general,home_md|audioFormat=pcm16k|voiceField=md|id_1028=8" +"\n"
                 testsetlines=testsetlines+lines
 
-                plines = "test" + temp_item + "="+ser_audiorootpath+temp_item+"/|./"+ser_refpath+"/"+item + "\n"
+                plines = "test" + temp_item + "="+ser_audiorootpath+temp_item+"/|./audiofiles1/8009/"+ser_refpath+"/"+item + "\n"
                 pathlines=pathlines+plines
 
         ofobject.write_fileinfo(configsavepath,testsetlines)

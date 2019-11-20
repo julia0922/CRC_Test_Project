@@ -6,7 +6,6 @@ class OperationFile(object):
         if dirlist==None:
             dirlist=[]
 
-
         isExistWavFile=False
         list = os.listdir(rootdir)
         for dirname in list:
@@ -86,16 +85,25 @@ class OperationFile(object):
 
     # 拷贝某一个文件
     def start_copy_file(self,s_path,taget_path):
-         if os.path.exists(s_path) == True:
-             root_dirpath = os.path.dirname(taget_path)
-             print(root_dirpath)
-             if os.path.exists(root_dirpath)==False:
-                 os.makedirs(root_dirpath)
-             shutil.copyfile(s_path, taget_path)
+        if os.path.exists(taget_path):
+            return
+
+        if os.path.exists(s_path) == True:
+            root_dirpath = os.path.dirname(taget_path)
+            print(root_dirpath)
+            if os.path.exists(root_dirpath)==False:
+                os.makedirs(root_dirpath)
+            shutil.copyfile(s_path, taget_path)
 
     def write_fileinfo(self,filepath,lines):
-        with open(filepath, 'a+') as f:
+        with open(filepath, 'a+',encoding="utf-8") as f:
            f.writelines(lines)
+
+    def read_fileinfo(self,filepath):
+        with open(filepath, 'r',encoding="utf-8") as f:
+            alllines=f.readlines()
+
+        return  alllines
 
 
 if __name__=="__main__":
