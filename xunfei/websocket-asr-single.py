@@ -18,7 +18,7 @@ APIKEY = "b1c9db5797d7bd16567bb2e6a34cf075"
 END_FLAG = "--end--"
 param = "{\"result_level\":\"plain\",\"auth_id\":\"894c985bf8b1111c6728db79d3479aef\",\"data_type\":\"audio\",\"aue\":\"raw\",\"scene\":\"main_box\",\"sample_rate\":\"16000\"}";
 
-audio_file_path="/data1/audio_file/wav/20人录音第一批交付-全品类/G00001/001M35_F01_80_0001.wav"
+audio_file_path="E:/audiofile/1/038M23_09_42_0005.wav"
 
 def on_message(ws, message):
    print ('Message>>>>>>>>>>>>>>>>>>>>>>>>')
@@ -79,7 +79,7 @@ def sha256hex(data):
 if __name__ == "__main__":
     url = BASE_URL + getHandShakeParams()
     websocket.enableTrace(True)
-    ws = websocket.WebSocketApp(url,
+    ws = websocket.WebSocketApp(url,header={"Origin":"http://wsapi.xfyun.cn"},
                                 on_message=on_message,
                                 on_error=on_error,
                                 on_close=on_close)
